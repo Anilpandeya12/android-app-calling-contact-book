@@ -1,6 +1,8 @@
 #App-to-App Calling Integrated With Your Contact Book
 
 In this tutorial, I'll show you how to build an app-to-app calling app that only lets you call people in your contact book that have the app installed. This project uses Sinch for the phone number verification, and Parse for the user management.
+
+![overview of app](images/app-overview.png)
      
 Unlike some of my other tutorials that walk you through every bit of code you need to build the app, this tutorial will touch on the main concepts here, and let you dig through the code on our Github at your own pace. The finished app code can be found at [https://www.github.com/sinch/android-app-calling-contact-book](https://www.github.com/sinch/android-app-calling-contact-book)        
     
