@@ -88,6 +88,7 @@ public class LoginActivity extends Activity {
                 user.signUpInBackground(new SignUpCallback() {
                     public void done(com.parse.ParseException e) {
                         if (e == null) {
+                            ParseUser.becomeInBackground(ParseUser.getCurrentUser().getSessionToken());
                             startActivity(notVerifiedIntent);
                         } else {
                             Toast.makeText(getApplicationContext(),

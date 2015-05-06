@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 public class ListContactsActivity extends ActionBarActivity {
 
     @Override
@@ -64,7 +63,6 @@ public class ListContactsActivity extends ActionBarActivity {
                     for(int i=0; i<objects.size(); i++) {
                         if (contactBookNumbers.contains(objects.get(i).get("phoneNumber").toString())) {
                             adapter.add(objects.get(i).getUsername());
-                            System.out.println("Here: " + new Date());
                         }
                     }
                 } else {
