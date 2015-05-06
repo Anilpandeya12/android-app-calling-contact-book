@@ -20,7 +20,6 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ListContactsActivity extends ActionBarActivity {
