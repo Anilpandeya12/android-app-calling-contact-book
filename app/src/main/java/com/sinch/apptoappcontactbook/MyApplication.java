@@ -7,6 +7,6 @@ import com.parse.Parse;
 public class MyApplication extends Application {
     @Override
     public void onCreate() {
-        Parse.initialize(this, "YOUR_APPLICATION_ID", "YOUR_CLIENT_KEY");
+        Parse.initialize(this, "YOUR_APP_ID", "YOUR_CLIENT_KEY");
     }
 }

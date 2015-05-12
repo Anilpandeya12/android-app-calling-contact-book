@@ -106,6 +106,94 @@ When users sign up, you want to direct them to the activity to verify their phon
 
 ##Verify Phone Number
 
+Here, you will use the Sinch verification SDK to send an SMS and automatically read the pin code. Download the verification SDK from [sinch.com/downloads](https://www.sinch.com/downloads) and add the .jar file to your libs folder, then right-click and "add as library." 
+
+First, you'll need to add these permissions to your manifest file to be able to read the pin code from the incoming SMS:
+
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    
+
+Here's the layout I use for this activity:
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    tools:context=".VerifyPhoneNumberActivity">
+    
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:id="@+id/verifyPhoneNumberInput"
+            android:layout_centerHorizontal="true"/>
+    
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verify"
+            android:id="@+id/verifyPhoneNumberButton"
+            android:layout_below="@+id/verifyPhoneNumberInput"
+            android:layout_centerHorizontal="true"
+            android:onClick="sendVerificationRequest"/>
+    
+    </RelativeLayout>
+    
+In **VerifyPhoneNumberActivity**, it's easy to create a new SMS verification:
+
+    private final String APPLICATION_KEY = "YOUR_APPLICATION_KEY";
+    private String phoneNumber;
+    private Context context = this;
+    
+    public void sendVerificationRequest(View v) {
+        EditText phoneNumberField = (EditText) findViewById(R.id.verifyPhoneNumberInput);
+        phoneNumber = phoneNumberField.getText().toString();
+        createVerification(phoneNumber);
+        Toast.makeText(context, "Verifying phone number, please wait!", Toast.LENGTH_SHORT).show();
+    }
+
+    void createVerification(String phoneNumber) {
+        Config config = SinchVerification
+            .config()
+            .applicationKey(APPLICATION_KEY)
+            .context(context)
+            .build();
+        VerificationListener listener = new MyVerificationListener();
+        Verification verification = SinchVerification.createSmsVerification(config, phoneNumber, listener);
+        verification.initiate();
+    } 
+    
+Then, in a custom verification listener, you can define what to do in case of success or failure:
+
+    class MyVerificationListener implements VerificationListener {
+        @Override
+        public void onInitialized() {}
+
+        @Override
+        public void onInitializationFailed(Exception exception) {}
+
+        @Override
+        public void onVerified() {
+            Toast.makeText(context, "Your phone number has been verified.", Toast.LENGTH_LONG).show();
+
+            ParseUser currentUser = ParseUser.getCurrentUser();
+            currentUser.put("phoneNumber", phoneNumber);
+            currentUser.saveInBackground();
+
+            Intent intent = new Intent(context, ListContactsActivity.class);
+            startActivity(intent);
+        }
+
+        @Override
+        public void onVerificationFailed(Exception exception) {
+            Toast.makeText(context, "Verification failed: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
 ##List Contacts
