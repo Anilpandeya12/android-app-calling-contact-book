@@ -10,6 +10,8 @@ Unlike some of my other tutorials that walk you through every bit of code you ne
 
 Sign up for a Sinch account at [https://www.sinch.com/signup](https://www.sinch.com/signup) and download the verification SDK from [https://www.sinch.com/downloads](https://www.sinch.com/downloads)
 
+While the Sinch verification SDK is in beta, you'll need to email [dev@sinch.com](mailto:dev@sinch.com) to get your Sinch app whitelisted for verification.
+
 Also sign up for a Parse account and follow the steps to add Parse to your Android app here [https://parse.com/apps/quickstart#parse_data](https://parse.com/apps/quickstart#parse_data)
 
 ##Signup and Login
