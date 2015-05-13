@@ -49,10 +49,10 @@ public class VerifyPhoneNumberActivity extends ActionBarActivity {
 
     class MyVerificationListener implements VerificationListener {
         @Override
-        public void onInitialized() {}
+        public void onInitiated() {}
 
         @Override
-        public void onInitializationFailed(Exception exception) {}
+        public void onInitiationFailed(Exception exception) {}
 
         @Override
         public void onVerified() {
