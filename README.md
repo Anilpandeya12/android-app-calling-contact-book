@@ -1,4 +1,4 @@
-#App-to-App Calling Integrated With Your Contact Book
+#Flash Call Verification in your Android App to App Calling App 
 
 In this tutorial, I'll show you how to build an app-to-app calling app that only lets you call people in your contact book that have the app installed. This project uses Sinch for the phone number verification, and Parse for the user management.
 
